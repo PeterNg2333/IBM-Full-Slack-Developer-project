@@ -1,0 +1,183 @@
+/* Global Styles */
+
+body{
+    margin: 0px;
+    
+    font-family: Arial, sans-serif;
+}
+
+.flex-container{
+    display: flex;
+    
+}
+
+main{
+    margin: 15px;
+    padding: 0px;
+    width: 100%;
+}
+
+h2{
+    font: bold;
+    font-size: 200%;
+    color: rebeccapurple;
+}
+
+h3{
+    margin-top: 0px;
+    font: bold;
+    font-size: 120%;
+}
+
+h4{
+    margin-top: 0px;
+    font: bold;
+    font-size: 130%;
+    color: purple;
+}
+
+h5{
+    margin-top: 0px;
+    margin-bottom: 0px  ;
+    font: bold;
+    font-size: 120%;
+}
+
+/* Header Styles */
+
+nav{
+    background-color: purple;
+    display: flex;
+    margin: 0px;
+    padding: 10px;
+}
+
+.left-corner{
+    display: flex;
+    width: 50%;
+    margin-left: 10px;
+
+}
+
+.right-corner{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    width: 50%;
+    margin-right: 10px;
+
+}
+
+.nav-list{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 8px;
+    color: white;
+}
+
+.option-white{
+    color: white;
+    text-decoration: none;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+.option-white:hover{
+    font: bold;
+    text-decoration: underline;
+}
+
+.name{
+    color: white;
+    margin: 0px;
+}
+
+/* Main Styles */
+.aboutme-icon{
+    border: 3px solid black;
+}
+
+.aboutme{
+    margin: 10px;
+    padding: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.aboutme h2{
+    margin: 0px;
+    padding: 0px;
+    padding-top: 5px;
+}
+
+.icon svg{
+    width: 30px;
+    height: 30px;
+}
+
+.projects{
+    margin: 10px;
+    padding: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.projects ul{
+    margin-top: 0px;
+}
+
+.projects h3{
+    color: rebeccapurple;
+}
+
+.recommendations{
+    padding-left: 20px;
+    padding-top: 0px;
+    flex-wrap: wrap;
+
+}
+
+.comment-box{
+    border: 4px solid rebeccapurple;
+    border-radius: 5px;
+    margin: 10px;
+    height: 150px;
+    width: 300px;
+    padding: 10px;
+    overflow: hidden;
+    
+}
+
+
+.comment-form{
+    margin: 10px;
+    padding: 10px;
+    /* Make the form box centered */
+    padding-left: 20px;
+
+    
+}
+
+.comment-form button{
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    background-color: rebeccapurple;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.goToHome{
+    margin: 10px;
+    padding: 10px;
+    margin-top: 0px;
+    padding-top: 0px;
+    float: right;
+}

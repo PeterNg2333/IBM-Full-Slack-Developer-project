@@ -1,1 +1,254 @@
 <!DOCTYPE html>
+<head>
+    <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .popup-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .close-button {
+            cursor: pointer;
+        }
+
+        .active {
+            display: block;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="left-corner">
+            <div>
+                <h1 class="name">Peter Ng</h1>
+                <small class="name"> ~ Web Developer </small>
+                <a href="#Home"></a>
+            </div>
+        </div>
+        <div class="right-corner">
+            <ul class="nav-list">
+                <li><a class="option-white" href="#About">About</a></li>
+                <li><a class="option-white" href="#Skills">Skills</a></li>
+                <li><a class="option-white" href="#Project">Project details</a></li>
+                <li><a class="option-white" href="#Recommendations">Recommendations</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="About">
+            <div class="flex-container">
+                <div>
+                    <img class="aboutme-icon" src="./profile name.jpg" height="300px" width="300px" alt="Peter Ng">
+                </div>
+                <div class="aboutme">
+                    <h2>Hey...Hey...I am Peter</h2>
+                    <p>A web developer. I have a passion for web development and love to create websites that are both functional and visually appealing. I have experience with HTML, CSS, and JavaScript, and am always looking to expand my skill set. I am currently seeking new opportunities to work on exciting projects and collaborate with other developers. Feel free to reach out to me if you have any questions or would like to work together!</p>
+                </div>
+            
+            </div>
+        </section>
+
+
+        <section id="Skills">
+            <h2>Skills</h2>
+            <div class="flex-container">
+                <div class="skill">
+                    <h3>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 32l34.9 395.8L191.5 480l157.6-52.2L384 32H0zm308.2 127.9H124.4l4.1 49.4h175.6l-13.6 148.4-97.9 27v.3h-1.1l-98.7-27.3-6-75.8h47.7L138 320l53.5 14.5 53.7-14.5 6-62.2H84.3L71.5 112.2h241.1l-4.4 47.7z"/></svg>
+                        </span>
+                        HTML
+                    </h3>
+                    <p>HTML is the foundation of web development. I have experience creating websites using HTML and am familiar with the latest HTML5 standards. I can create well-structured, semantic HTML that is easy to read and maintain.</p>
+                </div>
+                <div class="skill">
+                    <h3>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 32l34.9 395.8L192 480l157.1-52.2L384 32H0zm313.1 80l-4.8 47.3L193 208.6l-.3 .1h111.5l-12.8 146.6-98.2 28.7-98.8-29.2-6.4-73.9h48.9l3.2 38.3 52.6 13.3 54.7-15.4 3.7-61.6-166.3-.5v-.1l-.2 .1-3.6-46.3L193.1 162l6.5-2.7H76.7L70.9 112h242.2z"/></svg>
+                        </span>
+                        CSS
+                    </h3>
+                    <p>CSS is essential for styling websites and making them visually appealing. I have experience using CSS to create responsive layouts, custom animations, and interactive elements. I can write clean, modular CSS that is easy to maintain and update.</p>
+                </div>
+                <div class="skill">
+                    <h3>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 32v448h448V32H0zm243.8 349.4c0 43.6-25.6 63.5-62.9 63.5-33.7 0-53.2-17.4-63.2-38.5l34.3-20.7c6.6 11.7 12.6 21.6 27.1 21.6 13.8 0 22.6-5.4 22.6-26.5V237.7h42.1v143.7zm99.6 63.5c-39.1 0-64.4-18.6-76.7-43l34.3-19.8c9 14.7 20.8 25.6 41.5 25.6 17.4 0 28.6-8.7 28.6-20.8 0-14.4-11.4-19.5-30.7-28l-10.5-4.5c-30.4-12.9-50.5-29.2-50.5-63.5 0-31.6 24.1-55.6 61.6-55.6 26.8 0 46 9.3 59.8 33.7L368 290c-7.2-12.9-15-18-27.1-18-12.3 0-20.1 7.8-20.1 18 0 12.6 7.8 17.7 25.9 25.6l10.5 4.5c35.8 15.3 55.9 31 55.9 66.2 0 37.8-29.8 58.6-69.7 58.6z"/></svg>
+                        </span>
+                        JavaScript
+                    </h3>
+                    <p>JavaScript is a powerful programming language that allows for dynamic, interactive web applications. I have experience using JavaScript to create client-side functionality, such as form validation, interactive maps, and dynamic content. I can write clean, efficient JavaScript code that is easy to read and debug.</p>
+                </div>
+                <div class="skill">
+                    <h3>
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                        </span>
+                        Github
+                    </h3>
+                    <p>GitHub is a web-based platform that allows developers to collaborate on projects and share code. I have experience using GitHub to manage version control, track changes, and collaborate with other developers. I can create branches, merge code, and resolve conflicts using Git and GitHub.</p>
+                </div>
+        </section>
+
+        <section id="Project">
+            <h2>Project Details</h2>
+            <hr>
+            <div class="projects">
+                <h3>Project 1</h3>
+                <ul>
+                    <li>Project Name: Portfolio Website</li>
+                    <li>Project Description: A personal portfolio website showcasing my skills, projects, and experience.</li>
+                    <li>Technologies Used: HTML, CSS, JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="projects">
+                <h3>Project 2</h3>
+                <ul>
+                    <li>Project Name: Weather App</li>
+                    <li>Project Description: A weather application that displays the current weather conditions for a given location.</li>
+                    <li>Technologies Used: HTML, CSS, JavaScript, API</li>
+                </ul>
+            </div>
+
+            <div class="projects">
+                <h3>Project 3</h3>
+                <ul>
+                    <li>Project Name: To-Do List</li>
+                    <li>Project Description: A simple to-do list application that allows users to add, edit, and delete tasks.</li>
+                    <li>Technologies Used: HTML, CSS, JavaScript</li>
+                </ul>
+        </section>
+
+
+        <section>
+            <h2 id="Recommendations">Recommendations</h2>
+            <div class="recommendations flex-container">
+                <div class="comment-box">
+                    <p>"Peter is a talented web developer with a keen eye for design. He is passionate about creating websites that are both functional and visually appealing. I would highly recommend him for any web development project."</p>
+                </div>
+                <div class="comment-box">
+                    <p>"Peter is a dedicated and hardworking developer who is always willing to go the extra mile to get the job done. He is a great team player and collaborator, and I would not hesitate to work with him again in the future."</p>
+                </div>
+                <div class="comment-box">
+                    <p>"Peter is a talented developer with a strong work ethic and a passion for web development. He is always eager to learn new technologies and improve his skills. I have no doubt that he will be successful in his future endeavors."</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section>
+            <div class="add-Comment">
+                <form class="comment-form">
+                    <h4>Add a Comment</h3>
+                    <div>
+                        <textarea cols="50" rows="10" id="comment" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" onclick="addRecommendation()" >Submit</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <div class="popup">
+        <div class="popup-content">
+            <span class="close-button">&times;</span>
+            <p>Recommendation added successfully!</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="goToHome">
+            <img src="./image.png" height="50px" width="50px" alt="Home" style="margin: 5px;">
+        </div>
+
+    <script>
+        // Task: (Complete it in OOP way)
+        // In Task 7, you must have noticed that a newly submitted recommendation does get added to the exsiting list, however there is no confirmation upon submission. Your final task will be to incorporate that.
+
+        // **Notice that the function showPopup() has already been provided with complete code in script.js. **
+
+        // Add the following code inside the addRecommendation() function in the space provided, so that the showPopup() function is invoked onyl when a recommendation is submitted.
+
+        // Create a class called popup
+        
+        class Popup {
+            constructor() {
+                this.popup = document.querySelector('.popup');
+                this.closeButton = document.querySelector('.close-button');
+            }
+
+            // Create a method called open() that adds the class 'active' to the popup element.
+            open() {
+                this.popup.classList.add('active');
+            }
+
+            // Create a method called close() that removes the class 'active' from the popup element.
+            close() {
+                this.popup.classList.remove('active');
+            }
+
+            // Create a method called addCloseEvent() that adds an event listener to the closeButton element that calls the close() method when clicked.
+            addCloseEvent() {
+                this.closeButton.addEventListener('click', () => {
+                    this.close();
+                });
+            }
+        }    
+
+        // Create a class called Recommendation
+        class Recommendation {
+            constructor(comment) {
+                this.comment = comment;
+            }
+
+            // Create a method called render() that returns a string containing the HTML markup for the comment box.
+            render() {
+                return `<div class="comment-box">
+                            <p>${this.comment}</p>
+                        </div>`;
+            }
+
+            // Create a static method called addComment() that takes a comment as an argument and adds it to the list of recommendations.
+            addComment() {
+                const commentBox = document.querySelector('.recommendations');
+                commentBox.innerHTML += this.render();
+            }
+        }
+
+        // Create a function called addRecommendation() that gets the value of the comment textarea and calls the addComment() method of the Recommendation class to add the comment to the list of recommendations.
+        function addRecommendation() {
+            const comment = document.getElementById('comment').value;
+            const newRecommendation = new Recommendation(comment);
+            newRecommendation.addComment();
+            alert("Recommendation added successfully!");
+        }
+
+
+    </script>
+
+</body>

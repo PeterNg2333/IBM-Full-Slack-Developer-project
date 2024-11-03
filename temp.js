@@ -21,35 +21,48 @@
     // };
 
     /* Global Variables */
-    let QUESTION_LIST = ['我想上廁所，廁所喺邊度？', '我想急尿？']
+    let QUESTION_LIST = []
     let ANSWER_LIST = [];
     let QUESTION_COUNTER = 0;
     let START_TIME = null;
     let PREVIOUS_RESPONSE = '';
+    let PREVIOUS_RESPONSE_TIME = 0;
+    let PREVIOUS_RESPONSE_No = 0;
     let CURRENT_QUESTION = '';
     let WAITING_TIME = 6000; // 6 seconds
     let INPUT_BOX = document.querySelector("#form .sc-textarea");
     let SEND_BUTTON = document.querySelector("#form .sc-user-input--send-icon-wrapper");
     const INPUT_EVENT = new Event('input', { bubbles: true });
+    const observer = new MutationObserver(() => endTimer(observer));
     if (!INPUT_BOX || !SEND_BUTTON) {
         console.error("Input box or send button or message window not found.");return}
 
     if (QUESTION_LIST.length === 0) {
         let questions = prompt("Please enter the questions separated by comma: ");
         try{
-            if (questions && questions.length > 0) QUESTION_LIST = questions.split(',').map(q => q.trim());}
+            if (questions && questions.length > 0) QUESTION_LIST = questions.split(',').map(q => q.trim());
+            console.log("Questions parsed successfully: ", QUESTION_LIST); }
         catch(err) {console.error("Error parsing questions. Exiting...", err);}
     }
 
     /* add Event Listener to listen for keydown events */
-    document.body.addEventListener('keydown', () => {
+    document.body.addEventListener('keydown', (event) => {
         let eventKey = event.key.toLowerCase();
-        if (eventKey === 'a') {
+        let isAlt = event.altKey;
+        if (eventKey === 'a' && isAlt) {
             startAutomation();
+            isAlt = false;
         }
+        if (eventKey === 'r' && isAlt) {
+            endTimer(observer);
+            isAlt = false;
+        }
+        
+        
     })
 
-    console.warn("Press 'a' to start the automation");
+    console.warn("Press 'alt + a' to start the automation");
+    console.warn("Press 'alt + r' to restart the Timer");
 
     /* 
     * Function to start the automation 
@@ -83,10 +96,11 @@
             // proceed to send the next question by sending the question and starting the timer
             console.warn(`Waiting for ${WAITING_TIME/1000} seconds before starting the next round...`);
             CURRENT_QUESTION = QUESTION_LIST[QUESTION_COUNTER];
+            INPUT_BOX.value = ''
             let waitingTime = QUESTION_COUNTER > 0? WAITING_TIME: 1000; // Wait for 1 second before sending the first question
             // Implement typing effect
             let text_length = CURRENT_QUESTION.length;
-            let typing_time =  waitingTime/text_length
+            let typing_time =  waitingTime/2/text_length
             for (let i=0; i<text_length; i++) {
                 setTimeout(() => {
                     INPUT_BOX.value += CURRENT_QUESTION[i];
@@ -121,9 +135,6 @@
         // Track console messages and screen updates by checking the message window using MutationObserver
         let messageWindow = document.querySelector("#messageWindow");
         if (!messageWindow) {console.error("Message window not found. Exiting...");return;}
-        let observer = new MutationObserver(() => {
-            endTimer(observer);
-        });
         observer.observe(messageWindow, {childList: true, subtree: true});
         console.warn(`Observer started... at ${Date()}`);
     }
@@ -145,7 +156,7 @@
     endTimer = (observer) => {
         console.log(`Try to end the timer at ${Date()}`);
         // Conditions to check 
-        let endTime= Date.now()/1000;
+        let endTime= Date.now();
         let allMsgReceived = document.querySelectorAll(".timestamp.timestamp-received");
         let allMsgSent = document.querySelectorAll(".timestamp.timestamp-sent");
         let lastNodeReceived = allMsgReceived[allMsgReceived.length - 1].parentElement.querySelector(".sc-message--text");
@@ -155,14 +166,21 @@
         let lastSentMsgEqualCurrentQuestion = lastSentMsg === CURRENT_QUESTION;
         let lastReceivedMsgNotEqualPreviousResponse = lastReceivedMsg !== PREVIOUS_RESPONSE;
         let isOnlyOneMsgReceived = allMsgReceived.length === 1;
+        let isIntervalMoreThanOneSecond = (endTime - PREVIOUS_RESPONSE_TIME) > 1000;
+        let isLastReceivedMsg = allMsgReceived.length > PREVIOUS_RESPONSE_No;
         console.log("Checking conditions...");
         console.log(`lastSentMsg: ${lastSentMsg}, lastReceivedMsg: ${lastReceivedMsg}, lastSentMsgEqualCurrentQuestion: ${lastSentMsgEqualCurrentQuestion}`);
         console.log(`lastReceivedMsg: ${lastReceivedMsg}, PREVIOUS_RESPONSE: ${PREVIOUS_RESPONSE}, lastReceivedMsgNotEqualPreviousResponse: ${lastReceivedMsgNotEqualPreviousResponse}`);
         console.log(`isOnlyOneMsgReceived: ${isOnlyOneMsgReceived}`);
+        console.log(`isIntervalMoreThanOneSecond: ${isIntervalMoreThanOneSecond}`);
+        console.log(`isLastReceivedMsg: ${isLastReceivedMsg}`);
 
-        if (lastSentMsgEqualCurrentQuestion && lastReceivedMsgNotEqualPreviousResponse && !isOnlyOneMsgReceived) {
+        if (lastSentMsgEqualCurrentQuestion 
+            && (lastReceivedMsgNotEqualPreviousResponse || (isIntervalMoreThanOneSecond && isLastReceivedMsg)) 
+            && !isOnlyOneMsgReceived
+        ) {
             // Stop the timer and calculate the elapsed time
-            let timeElapsed = (endTime*1000 - START_TIME) / 1000  ; // in seconds
+            let timeElapsed = (endTime - START_TIME) / 1000  ; // in seconds
             console.warn(`End Timer. Time interval: ${timeElapsed} seconds`);
 
             // Copy response and time to clipboard
@@ -174,6 +192,8 @@
 
             // Assign the last received message to the PREVIOUS_RESPONSE
             PREVIOUS_RESPONSE = lastReceivedMsg;
+            PREVIOUS_RESPONSE_TIME = endTime;
+            PREVIOUS_RESPONSE_No = allMsgReceived.length;
 
             // Stop the observer and Wait for 5 seconds before starting the next round
             observer.disconnect();

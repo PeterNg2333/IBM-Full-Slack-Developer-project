@@ -27,6 +27,7 @@ def emotionDetector(text_to_analyze):
     return json.loads(response)
     
     
-    
+if __name__ == '__main__':
+    print(emotionDetector("I am glad this happened"))
     
 

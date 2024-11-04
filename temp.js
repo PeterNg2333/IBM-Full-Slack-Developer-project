@@ -29,6 +29,7 @@
     let PREVIOUS_RESPONSE_TIME = 0;
     let PREVIOUS_RESPONSE_No = 0;
     let CURRENT_QUESTION = '';
+    let STOP_AFTER_SOME_ROUNDS = 4;
     let WAITING_TIME = 6000; // 6 seconds
     let INPUT_BOX = document.querySelector("#form .sc-textarea");
     let SEND_BUTTON = document.querySelector("#form .sc-user-input--send-icon-wrapper");
@@ -40,7 +41,7 @@
     if (QUESTION_LIST.length === 0) {
         let questions = prompt("Please enter the questions separated by comma: ");
         try{
-            if (questions && questions.length > 0) QUESTION_LIST = questions.split(',').map(q => q.trim());
+            if (questions && questions.length > 0) QUESTION_LIST = questions.split('|').map(q => q.trim());
             console.log("Questions parsed successfully: ", QUESTION_LIST); }
         catch(err) {console.error("Error parsing questions. Exiting...", err);}
     }
@@ -51,11 +52,18 @@
         let isAlt = event.altKey;
         if (eventKey === 'a' && isAlt) {
             startAutomation();
-            isAlt = false;
         }
         if (eventKey === 'r' && isAlt) {
             endTimer(observer);
-            isAlt = false;
+        }
+        // Copy the Answer List to clipboard
+        if (eventKey === 'c' && isAlt) {
+            let allResponses = ANSWER_LIST.join('\n');
+            navigator.clipboard.writeText(allResponses)
+                .then(() => {console.warn("All responses copied to clipboard!");})
+                .catch(err => {
+                    console.error('Failed to copy responses to clipboard. Please copy the following csv string manually:\n', allResponses);
+                });
         }
         
         
@@ -70,7 +78,13 @@
     * In the subsequent rounds, it will called by the endTimer function to send the next question until all questions are answered
     * This is recursive function that will call itself until all questions are answered
     */
-    startAutomation = () => {
+    startAutomation = (isRun=true) => {
+        // Check if the number of rounds is more than STOP_AFTER_SOME_ROUNDS
+        if (QUESTION_COUNTER%STOP_AFTER_SOME_ROUNDS === 0 && QUESTION_COUNTER > 0 && isRun) {
+            console.warn(`Stopped after ${STOP_AFTER_SOME_ROUNDS} rounds.`);
+            setTimeout(() => {startAutomation(false);}, WAITING_TIME*2);
+            return;
+        }
         // Check if all questions have been answered
         let allQuestionsAnswered = QUESTION_COUNTER >= QUESTION_LIST.length;
         if (allQuestionsAnswered){
@@ -154,7 +168,7 @@
     *     
     */
     endTimer = (observer) => {
-        console.log(`Try to end the timer at ${Date()}`);
+        console.warn(`Try to end the timer at ${Date()}`);
         // Conditions to check 
         let endTime= Date.now();
         let allMsgReceived = document.querySelectorAll(".timestamp.timestamp-received");
